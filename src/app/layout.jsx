@@ -1,5 +1,7 @@
 import localFont from "next/font/local";
+
 import "./globals.css";
+import ThemeProvider from "@/context/Theme";
 
 const poppinsLt = localFont({
   src: "./fonts/poppinsLt.ttf",
@@ -31,11 +33,18 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${poppinsMd.variable} ${poppinsRg.variable} ${poppinsLt.variable} ${poppinsSb.variable} antialiased`}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
